@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UnauthorizedComponent } from '../components/unauthorized/unauthorized.component';
+import { RoleGuard } from '../shared/guards/role.guard';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
@@ -13,6 +15,7 @@ const routes: Routes = [
       import('./user-dashboard/user-dashboard.module').then(
         (m) => m.UserDashboardModule
       ),
+    canActivate: [RoleGuard],
   },
   {
     path: 'super-admin-dashboard',
@@ -20,6 +23,7 @@ const routes: Routes = [
       import('./super-admin-dashboard/super-admin-dashboard.module').then(
         (m) => m.SuperAdminDashboardModule
       ),
+    canActivate: [RoleGuard],
   },
   {
     path: 'admin-dashboard',
@@ -27,6 +31,11 @@ const routes: Routes = [
       import('./admin-dashboard/admin-dashboard.module').then(
         (m) => m.AdminDashboardModule
       ),
+    canActivate: [RoleGuard],
+  },
+  {
+    path: 'unauthorized',
+    component: UnauthorizedComponent,
   },
 ];
 
