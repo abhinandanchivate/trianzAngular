@@ -26,6 +26,8 @@ export class LoginComponent implements OnInit {
           'userDetails',
           JSON.stringify(jwt_decode(response.token))
         );
+
+        localStorage.setItem('roles', JSON.stringify(response.roles));
         // switch to dashboard component and it should happend dynamically.
         this.router.navigate(['/dashboard']);
       },

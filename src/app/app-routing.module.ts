@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { LandingComponent } from './core/components/layouts/landing/landing.component';
+import { AuthGuard } from './shared/guards/auth.guard';
 // this module will help us to handle routes for modules(99%) & components(1%)
 const routes: Routes = [
   {
@@ -17,11 +20,21 @@ const routes: Routes = [
     path: 'dashboard',
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'profile',
     loadChildren: () =>
       import('./profile/profile.module').then((m) => m.ProfileModule),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'unauthorized',
+    component: UnauthorizedComponent,
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
 ];
 
